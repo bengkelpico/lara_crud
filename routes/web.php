@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/pola/jumlah', 'PolaController@index')->name('jumlah');
+Route::get('/pola/star', 'PolaController@star')->name('star');
+
+Route::resource('products', 'ProductController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
