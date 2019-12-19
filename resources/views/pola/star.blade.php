@@ -26,7 +26,7 @@
                             -
                         </template>
                         <template v-for="ii in i">
-                            @{{ ii }}
+                            *
                         </template>
                         <template v-for="j in (jumlah - k)">
                             -
