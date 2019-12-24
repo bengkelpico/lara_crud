@@ -11,43 +11,46 @@
     <div id="app">
         <form @submit.prevent="submit">
             <input type="number" name="jumlah" v-model.number="jumlah"/>
-            <div v-for="i in jumlah">
-                <template v-for="j in (jumlah - i)">
-                    &nbsp;
-                </template>
-                <template v-for="ii in i">
-                    *
-                </template>
-                <template v-for="j in (jumlah - i)">
-                    &nbsp;
-                </template>
-                <br/>
-            </div>
-            <div v-for="(i, k) in (jumlah - 1)">
-                <template v-for="j in i">
-                    &nbsp;
-                </template>
-                <template v-for="ii in (jumlah - i)">
-                    *
-                </template>
-                <template v-for="j in i">
-                    &nbsp;
-                </template>
-                <br/>
-            </div>
+            <table>
+                <tbody>
+                    <tr v-for="(top, k) in tops" :key="top + 'top' + k">
+                        <td style="text-align:center">
+                            <template v-for="t in top">*</template>
+                        </td>
+                    </tr>
+                    <tr v-for="(bottom, k) in bottoms" :key="bottom + 'bottom' + k">
+                        <td style="text-align:center">
+                            <template v-for="b in bottom">*</template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
     </div>
     <script src="/vue.js"></script>
     <script>
     var app = new Vue({
             el: '#app',
-            data: {
-                jumlah: 3
+            data() {
+                return {
+                    jumlah: 3
+                }
             },
             computed: {
-                star() {
-                    var result = '';
-
+                tops() {
+                    var result = []
+                    for (var index = 0; index < this.jumlah; index++) {
+                        var obj = index * 2 + 1
+                        result.push(obj)
+                    }
+                    return result
+                },
+                bottoms() {
+                    var result = []
+                    for (var index = this.jumlah - 1; index > 0; index--) {
+                        var obj = index * 2 - 1
+                        result.push(obj)
+                    }
                     return result
                 }
             },
